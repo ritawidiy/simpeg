@@ -1,0 +1,62 @@
+dicopas ndek tambahdata_admin
+
+
+{!! Form::open(['route' => 'barang.store']) !!}
+                        {{ csrf_field() }}
+                        <div class="form-body">
+                           @if($errors->any())
+                           <div class="alert alert-danger">
+                              <button class="close" data-close="alert"></button>
+                              <p>Terdapat beberapa kesalahan. Silahkan diperbaiki.</p>
+                              <br>
+                              @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                              @endforeach
+                           </div>
+                           @endif
+                        <div class="form-body">
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="form-group {{ $errors->has('namabarang') ? 'has-error' : ''}}">
+                                    <label class="control-label">Nama Barang</label>
+                                    {!! Form::text('namabarang', null, ['class' => 'form-control'] ) !!}
+                                    <span class="help-block">{{ $errors->has('namabarang') ? $errors->first('namabarang') : '' }}</span>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group {{ $errors->has('id_kategori') ? 'has-error' : ''}}">
+                                    <label class="control-label">Kategori</label>
+                                    {{ Form::select('id_kategori', $kategori, null, ['class' => 'form-control']) }}
+                                    <span class="help-block">{{ $errors->has('id_kategori') ? $errors->first('id_kategori') : '' }}</span>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group {{ $errors->has('tipebarang') ? 'has-error' : ''}}">
+                                    <label class="control-label">Tipe Barang</label>
+                                    {!! Form::text('tipebarang', null, ['class' => 'form-control'] ) !!}
+                                    <span class="help-block">{{ $errors->has('tipebarang') ? $errors->first('tipebarang') : '' }}</span>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group {{ $errors->has('keterangan') ? 'has-error' : ''}}">
+                                    <label class="control-label">Spek</label>
+                                    {!! Form::textarea('keterangan', null, ['size' => '108x5'] ) !!}
+                                    <span class="help-block">{{ $errors->has('keterangan') ? $errors->first('keterangan') : '' }}</span>
+                                 </div>
+                              </div>
+                               <div class="row">
+                                 <div class="form-group {{ $errors->has('lama_penerimaan') ? 'has-error' : ''}}">
+                                    <label class="control-label">Keterangan</label>
+                                    {!! Form::textarea('lama_penerimaan', null, ['size' => '108x5'] ) !!}
+                                    <span class="help-block">{{ $errors->has('lama_penerimaan') ? $errors->first('lama_penerimaan') : '' }}</span>
+                                 </div>
+                              </div>
+                              <div class="row form-group">
+                                 <div class="col-lg-6">
+                                    <input type="submit" value="SIMPAN" class="btn btn-primary btn-block">
+                                 </div>
+                                 <div class="row form-group">
+                                    <div class="col-lg-6">
+                                       <input type="reset" value="BATAL" class="btn btn-primary btn-block">
+                                    </div>
+                                    </form>
