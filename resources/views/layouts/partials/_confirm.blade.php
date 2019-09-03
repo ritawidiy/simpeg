@@ -2,12 +2,12 @@
     $(".delete-data").on('click', function () {
         var linkURL = $(this).attr("href");
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Apakah Anda yakin?',
+            text: "Anda tidak dapat mengembalikannya!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#fa5555',
-            confirmButtonText: 'Yes, delete it!',
+            confirmButtonText: 'Ya, saya yakin!',
             showLoaderOnConfirm: true,
 
             preConfirm: function () {

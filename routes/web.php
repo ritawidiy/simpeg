@@ -479,11 +479,60 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
 
     Route::post('tambah/pegawai', 'tampildataController@savepegwai')->name('save.pegawai');
 
-    Route::group(['prefix' => 'usulan-mutasi'], function (){
+    Route::group(['prefix' => 'user/riwayat-mutasi', 'middleware' => 'user'], function () {
 
         Route::get('/', [
             'uses' => 'RiwayatMutasi@showRiwayatMutasi',
             'as' => 'show.riwayat-mutasi'
+        ]);
+
+        Route::get('nkpd-minit', [
+            'uses' => 'RiwayatMutasi@showNKPDMinit',
+            'as' => 'show.nkpd-minit'
+        ]);
+
+        Route::get('petikan', [
+            'uses' => 'RiwayatMutasi@showPetikan',
+            'as' => 'show.petikan'
+        ]);
+
+        Route::get('sk-perorangan', [
+            'uses' => 'RiwayatMutasi@showSKPerorangan',
+            'as' => 'show.sk-perorangan'
+        ]);
+
+        Route::get('tanda-terima', [
+            'uses' => 'RiwayatMutasi@showTandaTerima',
+            'as' => 'show.tanda-terima'
+        ]);
+
+        Route::post('create', [
+            'uses' => 'RiwayatMutasi@createRiwayatMutasi',
+            'as' => 'create.riwayat-mutasi'
+        ]);
+
+        Route::put('update', [
+            'uses' => 'RiwayatMutasi@updateRiwayatMutasi',
+            'as' => 'update.riwayat-mutasi'
+        ]);
+
+        Route::get('{id}/delete', [
+            'uses' => 'RiwayatMutasi@deleteRiwayatMutasi',
+            'as' => 'delete.riwayat-mutasi'
+        ]);
+
+        Route::post('unggah-berkas', [
+            'uses' => 'RiwayatMutasi@unggahBerkasMutasi',
+            'as' => 'unggah.berkas-mutasi'
+        ]);
+
+    });
+
+    Route::group(['prefix' => 'admin/usulan-mutasi', 'middleware' => 'admin'], function () {
+
+        Route::get('/', [
+            'uses' => 'RiwayatMutasi@showUsulanMutasi',
+            'as' => 'show.usulan-mutasi'
         ]);
 
     });
