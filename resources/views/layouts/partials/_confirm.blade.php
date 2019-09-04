@@ -22,12 +22,12 @@
 
     $(".btn_signOut").on("click", function () {
         swal({
-            title: 'Sign Out',
-            text: "Are you sure to end your session?",
+            title: 'Keluar',
+            text: "Apakah Anda yakin untuk mengakhiri sesi Anda?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#fa5555',
-            confirmButtonText: 'Yes, sign out now!',
+            confirmButtonText: 'Yes, saya yakin!',
             showLoaderOnConfirm: true,
 
             preConfirm: function () {
@@ -42,12 +42,12 @@
 
     $(".btn_signOut2").on("click", function () {
         swal({
-            title: 'Sign Out',
-            text: "Are you sure to end your session?",
+            title: 'Keluar',
+            text: "Apakah Anda yakin untuk mengakhiri sesi Anda?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#fa5555',
-            confirmButtonText: 'Yes, sign out now!',
+            confirmButtonText: 'Yes, saya yakin!',
             showLoaderOnConfirm: true,
 
             preConfirm: function () {

@@ -117,9 +117,8 @@
                                     <li><a href="{{ route('data.pegawai.Kelamin') }}">Filter Kelamin</a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="{{Auth::user()->level == 45 ? route('show.usulan-mutasi') : route('show.riwayat-mutasi')}}">
-                                    <i class="fa fa-clipboard"></i> Proses Mutasi</a></li>
+                            <li><a href="{{route('show.riwayat-mutasi')}}"><i class="fa fa-clipboard"></i> Proses Mutasi</a>
+                            </li>
                             <li><a><i class="fa fa-asterisk"></i>Password <span class="fa fa-chevron-down"></span></a>
                             </li>
                         </ul>
@@ -217,8 +216,17 @@
 <script src="{{ asset('vendors/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('build/js/custom.min.js') }}"></script>
-@include('layouts.partials._pnotify')
+@include('layouts.partials._alert')
 @include('layouts.partials._confirm')
+<script>
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+    (function titleScroller(text) {
+        document.title = text;
+        setTimeout(function () {
+            titleScroller(text.substr(1) + text.substr(0, 1));
+        }, 500);
+    }(title + " ~ "));
+</script>
 @stack('script')
 </body>
 </html>

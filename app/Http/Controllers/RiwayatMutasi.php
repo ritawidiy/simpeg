@@ -11,10 +11,16 @@ class RiwayatMutasi extends Controller
 {
     public function showRiwayatMutasi()
     {
+        $level = Auth::user()->level;
         $bio = Biodata::where('nip', Auth::user()->username)->first();
-        $data = \App\Model\Riwayatmutasi::where('nip', Auth::user()->username)->get();
 
-        return view('user.riwayat-mutasi', compact('bio', 'data'));
+        if ($level == 7) {
+            $data = \App\Model\Riwayatmutasi::where('nip', Auth::user()->username)->get();
+        } else {
+            $data = \App\Model\Riwayatmutasi::orderByDesc('id')->get();
+        }
+
+        return view('riwayat-mutasi', compact('level', 'bio', 'data'));
     }
 
     public function createRiwayatMutasi(Request $request)
@@ -99,6 +105,17 @@ class RiwayatMutasi extends Controller
         return back()->with('success', 'Data mutasi [' . $data->nip . '] berhasil dihapus!');
     }
 
+    public function verifyRiwayatMutasi(Request $request)
+    {
+        $data = \App\Model\Riwayatmutasi::find($request->id);
+        $data->update([
+            'status' => $request->status,
+            'userpengusul' => $request->userpengusul,
+        ]);
+
+        return back()->with('success', 'Data mutasi [' . $data->nip . '] berhasil ' . $data->status . '!');
+    }
+
     public function unggahBerkasMutasi(Request $request)
     {
         $data = \App\Model\Riwayatmutasi::find($request->id);
@@ -114,7 +131,8 @@ class RiwayatMutasi extends Controller
             'skb_tugasbelajar' => $request->skb_tugasbelajar,
             'skb_tanggunganhutang' => $request->skb_tanggunganhutang,
             'fcl_dp3_skp' => $request->fcl_dp3_skp,
-            'ijazah_transkripnilai' => $request->ijazah_transkripnilai,
+            'fcl_ijazah_transkripnilai' => $request->fcl_ijazah_transkripnilai,
+            'daftar_riwayathidup' => $request->daftar_riwayathidup,
             'fcl_ktp' => $request->fcl_ktp,
             'fcl_kartupegawai' => $request->fcl_kartupegawai,
             'fcl_suratnikah' => $request->fcl_suratnikah,
@@ -126,5 +144,35 @@ class RiwayatMutasi extends Controller
         ]);
 
         return back()->with('success', 'Berkas mutasi [' . $data->nip . '] berhasil diperbarui!');
+    }
+
+    public function verifyBerkasMutasi(Request $request)
+    {
+        $data = BerkasMutasi::where('riwayatmutasi_id', $request->id)->first();
+        $data->update([
+            'status_foto_berwarna' => $request->status_foto_berwarna,
+            'status_suratpersetujuan_instansi' => $request->status_suratpersetujuan_instansi,
+            'status_suratpermohonan_mutasi' => $request->status_suratpermohonan_mutasi,
+            'status_fcl_skcpns' => $request->status_fcl_skcpns,
+            'status_fcl_skpns' => $request->status_fcl_skpns,
+            'status_fcl_skpangkatakhir' => $request->status_fcl_skpangkatakhir,
+            'status_skb_indisipliner' => $request->status_skb_indisipliner,
+            'status_skb_tugasbelajar' => $request->status_skb_tugasbelajar,
+            'status_skb_tanggunganhutang' => $request->status_skb_tanggunganhutang,
+            'status_fcl_dp3_skp' => $request->status_fcl_dp3_skp,
+            'status_fcl_ijazah_transkripnilai' => $request->status_fcl_ijazah_transkripnilai,
+            'status_daftar_riwayathidup' => $request->status_daftar_riwayathidup,
+            'status_fcl_ktp' => $request->status_fcl_ktp,
+            'status_fcl_kartupegawai' => $request->status_fcl_kartupegawai,
+            'status_fcl_suratnikah' => $request->status_fcl_suratnikah,
+            'status_sp_satuistri_istripertama' => $request->status_sp_satuistri_istripertama,
+            'status_sp_bersediaditempatkan' => $request->status_sp_bersediaditempatkan,
+            'status_sk_sehatjasmani' => $request->status_sk_sehatjasmani,
+            'status_tupoksi' => $request->status_tupoksi,
+            'status_sertifikat_keahlian' => $request->status_sertifikat_keahlian,
+            'status_berkas' => $request->status_berkas
+        ]);
+
+        return back()->with('success', 'Berkas mutasi [' . $data->getRiwayatMutasi->nip . '] berhasil diverifikasi!');
     }
 }

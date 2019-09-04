@@ -14,10 +14,6 @@ use App\Http\Controllers\pegawaiController;
 */
 Auth::routes();
 
-//Route::get('/', function () {
-//   return bcrypt ('123456');
-//});
-
 Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::get('/', 'simpegController@index')->name('dashboard');
 });
@@ -479,63 +475,51 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
 
     Route::post('tambah/pegawai', 'tampildataController@savepegwai')->name('save.pegawai');
 
-    Route::group(['prefix' => 'user/riwayat-mutasi', 'middleware' => 'user'], function () {
+    Route::group(['prefix' => 'riwayat-mutasi'], function () {
 
         Route::get('/', [
             'uses' => 'RiwayatMutasi@showRiwayatMutasi',
             'as' => 'show.riwayat-mutasi'
         ]);
 
-        Route::get('nkpd-minit', [
-            'uses' => 'RiwayatMutasi@showNKPDMinit',
-            'as' => 'show.nkpd-minit'
-        ]);
+        Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
 
-        Route::get('petikan', [
-            'uses' => 'RiwayatMutasi@showPetikan',
-            'as' => 'show.petikan'
-        ]);
+            Route::post('create', [
+                'uses' => 'RiwayatMutasi@createRiwayatMutasi',
+                'as' => 'create.riwayat-mutasi'
+            ]);
 
-        Route::get('sk-perorangan', [
-            'uses' => 'RiwayatMutasi@showSKPerorangan',
-            'as' => 'show.sk-perorangan'
-        ]);
+            Route::put('update', [
+                'uses' => 'RiwayatMutasi@updateRiwayatMutasi',
+                'as' => 'update.riwayat-mutasi'
+            ]);
 
-        Route::get('tanda-terima', [
-            'uses' => 'RiwayatMutasi@showTandaTerima',
-            'as' => 'show.tanda-terima'
-        ]);
+            Route::get('{id}/delete', [
+                'uses' => 'RiwayatMutasi@deleteRiwayatMutasi',
+                'as' => 'delete.riwayat-mutasi'
+            ]);
 
-        Route::post('create', [
-            'uses' => 'RiwayatMutasi@createRiwayatMutasi',
-            'as' => 'create.riwayat-mutasi'
-        ]);
+            Route::post('unggah-berkas', [
+                'uses' => 'RiwayatMutasi@unggahBerkasMutasi',
+                'as' => 'unggah.berkas-mutasi'
+            ]);
 
-        Route::put('update', [
-            'uses' => 'RiwayatMutasi@updateRiwayatMutasi',
-            'as' => 'update.riwayat-mutasi'
-        ]);
+        });
 
-        Route::get('{id}/delete', [
-            'uses' => 'RiwayatMutasi@deleteRiwayatMutasi',
-            'as' => 'delete.riwayat-mutasi'
-        ]);
+        Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
-        Route::post('unggah-berkas', [
-            'uses' => 'RiwayatMutasi@unggahBerkasMutasi',
-            'as' => 'unggah.berkas-mutasi'
-        ]);
+            Route::put('verify', [
+                'uses' => 'RiwayatMutasi@verifyRiwayatMutasi',
+                'as' => 'verify.riwayat-mutasi'
+            ]);
 
-    });
+            Route::put('berkas/verify', [
+                'uses' => 'RiwayatMutasi@verifyBerkasMutasi',
+                'as' => 'verify.berkas-mutasi'
+            ]);
 
-    Route::group(['prefix' => 'admin/usulan-mutasi', 'middleware' => 'admin'], function () {
-
-        Route::get('/', [
-            'uses' => 'RiwayatMutasi@showUsulanMutasi',
-            'as' => 'show.usulan-mutasi'
-        ]);
+        });
 
     });
 
 });
-

@@ -38,8 +38,8 @@ class CreateBerkasmutasiTable extends Migration
             $table->boolean('status_skb_tanggunganhutang')->default(false);
             $table->text('fcl_dp3_skp')->nullable();
             $table->boolean('status_fcl_dp3_skp')->default(false);
-            $table->text('ijazah_transkripnilai')->nullable();
-            $table->boolean('status_ijazah_transkripnilai')->default(false);
+            $table->text('fcl_ijazah_transkripnilai')->nullable();
+            $table->boolean('status_fcl_ijazah_transkripnilai')->default(false);
             $table->text('daftar_riwayathidup')->nullable();
             $table->boolean('status_daftar_riwayathidup')->default(false);
             $table->text('fcl_ktp')->nullable();

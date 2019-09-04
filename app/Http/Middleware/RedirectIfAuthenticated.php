@@ -19,11 +19,11 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             if (Auth::user()->level == '7') {
-                return redirect()->route('user_page');//Return to Pegawai Page
+                return redirect()->route('user_page')->with('signed', 'Anda telah masuk');//Return to Pegawai Page
             } elseif (Auth::user()->level == '45') {
-                return redirect()->route('admin_page');//return to Admin Page
+                return redirect()->route('admin_page')->with('signed', 'Anda telah masuk');//return to Admin Page
             } elseif (Auth::user()->level == '') {
-                return redirect()->route('dashboard.admin');//Return to unit kerja Page
+                return redirect()->route('dashboard.admin')->with('signed', 'Anda telah masuk');//Return to unit kerja Page
             }
         }
 

@@ -2047,7 +2047,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editAnak(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2080,7 +2080,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editBahasa(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2122,7 +2122,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editCuti(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2165,7 +2165,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editDiklat(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2202,7 +2202,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editGaji(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2239,7 +2239,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editHukuman(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2272,7 +2272,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editJabatan(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2316,7 +2316,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editKursus(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2349,7 +2349,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editOrganisasi(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2442,7 +2442,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editPenataran(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2475,7 +2475,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editPendidikan(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {
@@ -2509,7 +2509,7 @@
                             '<button type="button" class="btn btn-warning btn-sm" onclick="editPenghargaan(' + val.id + ')">' +
                             '<i class="fa fa-edit"></i>&ensp;Edit</button>' +
                             '<button onclick="hapusData(\'' + val.id + '\',\'' + check + '\')" class="btn btn-danger btn-sm">' +
-                            '<i class="fa fa-trash"></i>&ensp;Delete</a></div></td></tr>';
+                            '<i class="fa fa-trash"></i>&ensp;Delete</button></div></td></tr>';
                     });
                     tbody.html(content);
                 } else {

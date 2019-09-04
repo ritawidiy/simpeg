@@ -36,7 +36,7 @@ class riwayatController extends Controller
             'kodeusulan' => $request->kodeusulan,
         ]);
 
-        return back();
+        return back()->with('success', 'Data anak [' . $request->nip . '] berhasil ditambahkan!');
     }
 
     public function editDataAnak($id)
@@ -60,14 +60,15 @@ class riwayatController extends Controller
             'kodeusulan' => $request->kodeusulan,
         ]);
 
-        return back();
+        return back()->with('success', 'Data anak [' . $data->nip . '] berhasil diperbarui!');
     }
 
     public function deleteDataAnak($id)
     {
-        Dataanak::destroy($id);
+        $data = Dataanak::find($id);
+        $data->delete();
 
-        return back();
+        return back()->with('success', 'Data anak [' . $data->nip . '] berhasil diperbarui!');
     }
 
     public function createDataBahasa(Request $request)
@@ -81,7 +82,7 @@ class riwayatController extends Controller
             'kodeusulan' => $request->kodeusulan,
         ]);
 
-        return back();
+        return back()->with('success', 'Data bahasa [' . $request->nip . '] berhasil ditambahkan!');
     }
 
     public function editDataBahasa($id)
@@ -101,14 +102,15 @@ class riwayatController extends Controller
             'kodeusulan' => $request->kodeusulan,
         ]);
 
-        return back();
+        return back()->with('success', 'Data bahasa [' . $data->nip . '] berhasil diperbarui!');
     }
 
     public function deleteDataBahasa($id)
     {
-        Riwayatbahasa::destroy($id);
+        $data = Riwayatbahasa::find($id);
+        $data->delete();
 
-        return back();
+        return back()->with('success', 'Data anak [' . $data->nip . '] berhasil diperbarui!');
     }
 
     public function createDataCuti(Request $request)
