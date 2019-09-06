@@ -117,7 +117,8 @@
                                     <li><a href="{{ route('data.pegawai.Kelamin') }}">Filter Kelamin</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{route('show.riwayat-mutasi')}}"><i class="fa fa-clipboard"></i> Proses Mutasi</a>
+                            <li class="{{Illuminate\Support\Facades\Request::is('riwayat-mutasi*') ? 'current-page' : ''}}">
+                                <a href="{{route('show.riwayat-mutasi')}}"><i class="fa fa-clipboard"></i> Proses Mutasi</a>
                             </li>
                             <li><a><i class="fa fa-asterisk"></i>Password <span class="fa fa-chevron-down"></span></a>
                             </li>

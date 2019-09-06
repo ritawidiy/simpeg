@@ -482,6 +482,16 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
             'as' => 'show.riwayat-mutasi'
         ]);
 
+        Route::get('{id}/berkas', [
+            'uses' => 'RiwayatMutasi@showBerkasMutasi',
+            'as' => 'show.berkas-mutasi'
+        ]);
+
+        Route::get('{nip}/berkas/{berkas}/unduh', [
+            'uses' => 'RiwayatMutasi@unduhBerkasMutasi',
+            'as' => 'unduh.berkas-mutasi'
+        ]);
+
         Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
 
             Route::post('create', [
@@ -499,7 +509,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
                 'as' => 'delete.riwayat-mutasi'
             ]);
 
-            Route::post('unggah-berkas', [
+            Route::post('berkas/unggah', [
                 'uses' => 'RiwayatMutasi@unggahBerkasMutasi',
                 'as' => 'unggah.berkas-mutasi'
             ]);

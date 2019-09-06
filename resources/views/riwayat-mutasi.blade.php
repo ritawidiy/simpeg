@@ -186,23 +186,15 @@
                                             @endif
                                         </td>
                                         <td style="vertical-align: middle" align="center">
-                                            @if($level == 7)
-                                                <div class="btn-group">
+                                            <div class="btn-group">
+                                                @if($level == 7)
                                                     <button onclick="editRiwayatMutasi('{{$d->id}}','{{$d->nip}}','{{$d->nama}}','{{$d->jeniskenaikan}}','{{$d->alasanmutasi}}','{{$d->pertimbangan}}','{{$d->nipatasan}}','{{$d->minit}}','{{$d->tglditetapkan}}','{{$d->nosk}}','{{$d->tglsk}}','{{$d->nobkn}}','{{$d->tglbkn}}','{{$d->jabatanlama}}','{{$d->jabatanbaru}}','{{$d->tmtlama}}','{{$d->tmtbaru}}','{{$d->gajilama}}','{{$d->gajibaru}}','{{$d->masakerjatahunlama}}','{{$d->masakerjabulanlama}}','{{$d->masakerjatahunbaru}}','{{$d->masakerjabulanbaru}}','{{$d->pangkatgolonganlama}}','{{$d->pangkatgolonganbaru}}','{{$d->eselonlama}}','{{$d->eselonbaru}}','{{$d->unitkerjalama}}','{{$d->unitkerjabaru}}')"
                                                             class="btn btn-warning btn-sm" data-toggle="tooltip"
                                                             title="Edit"><i class="fa fa-edit"></i></button>
                                                     <a href="{{route('delete.riwayat-mutasi', ['id' => encrypt($d->id)])}}"
                                                        class="btn btn-danger btn-sm delete-data" data-toggle="tooltip"
                                                        title="Hapus"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                                <hr style="margin: .5em 0">
-                                                <button onclick="berkasMutasi('{{$d->id}}', '{{$d->nip}}', '{{$d->status}}',
-                                                        '{{!$d->getBerkasMutasi ? 0 : 1}}')"
-                                                        class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-archive"></i>&ensp;Berkas Mutasi
-                                                </button>
-                                            @else
-                                                <div class="btn-group">
+                                                @else
                                                     <button type="button" class="btn btn-success btn-sm"
                                                             title="DISETUJUI" data-toggle="tooltip"
                                                             onclick="verifyMutasi('{{$d->id}}','{{$d->nip}}','DISETUJUI')"
@@ -213,14 +205,14 @@
                                                             onclick="verifyMutasi('{{$d->id}}','{{$d->nip}}','DITOLAK')"
                                                             {{$d->status == 'DITOLAK' || $d->status == 'DISETUJUI' ? 'disabled' : ''}}>
                                                         <i class="fa fa-ban"></i></button>
-                                                </div>
-                                                <hr style="margin: .5em 0">
-                                                <button onclick="berkasMutasi('{{$d->id}}', '{{$d->nip}}', '{{$d->status}}',
-                                                        '{{!$d->getBerkasMutasi ? 0 : 1}}')"
-                                                        class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-archive"></i>&ensp;Berkas Mutasi
-                                                </button>
-                                            @endif
+                                                @endif
+                                            </div>
+                                            <hr style="margin: .5em 0">
+                                            <button onclick="berkasMutasi('{{$d->id}}', '{{$d->nip}}', '{{$d->status}}',
+                                                    '{{!$d->getBerkasMutasi ? 0 : 1}}','{{route('show.berkas-mutasi', ['id' => encrypt($d->id)])}}')"
+                                                    class="btn btn-primary btn-sm">
+                                                <i class="fa fa-archive"></i>&ensp;Berkas Mutasi
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -503,439 +495,6 @@
             <input type="hidden" name="userpengusul" value="{{Auth::user()->username}}">
         </form>
     @endif
-
-    <div id="berkasMutasiModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title">Berkas Mutasi: <strong></strong></h4>
-                </div>
-                <form id="form-berkas-mutasi" method="post" action="{{route('unggah.berkas-mutasi')}}"
-                      enctype="multipart/form-data">{{csrf_field()}}
-                    <input type="hidden" name="riwayatmutasi_id">
-                    <div class="modal-body">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Berkas</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Foto berwarna 4R (full-body)</td>
-                                <td id="foto_berwarna"></td>
-                                <td>
-                                    <input type="file" name="foto_berwarna" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="foto_berwarna" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('foto_berwarna')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Surat persetujuan instansi</td>
-                                <td id="suratpersetujuan_instansi"></td>
-                                <td>
-                                    <input type="file" name="suratpersetujuan_instansi" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="suratpersetujuan_instansi" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('suratpersetujuan_instansi')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Surat permohonan mutasi</td>
-                                <td id="suratpermohonan_mutasi"></td>
-                                <td>
-                                    <input type="file" name="suratpermohonan_mutasi" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="suratpermohonan_mutasi" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('suratpermohonan_mutasi')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Fotocopy legalisir SKCPNS</td>
-                                <td id="fcl_skcpns"></td>
-                                <td>
-                                    <input type="file" name="fcl_skcpns" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_skcpns" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_skcpns')" class="btn btn-primary" type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Fotocopy legalisir SKPNS</td>
-                                <td id="fcl_skpns"></td>
-                                <td>
-                                    <input type="file" name="fcl_skpns" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_skpns" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_skpns')" class="btn btn-primary" type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Fotocopy legalisir SK Pangkat Terakhir</td>
-                                <td id="fcl_skpangkatakhir"></td>
-                                <td>
-                                    <input type="file" name="fcl_skpangkatakhir" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_skpangkatakhir" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_skpangkatakhir')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Surat keterangan bebas indisipliner dari BKD / Inspektorat</td>
-                                <td id="skb_indisipliner"></td>
-                                <td>
-                                    <input type="file" name="skb_indisipliner" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="skb_indisipliner" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('skb_indisipliner')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Surat keterangan bebas tugas belajar</td>
-                                <td id="skb_tugasbelajar"></td>
-                                <td>
-                                    <input type="file" name="skb_tugasbelajar" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="skb_tugasbelajar" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('skb_tugasbelajar')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Surat keterangan bebas tanggungan hutang keuangan dengan lembaga / bank disertai
-                                    Surat
-                                    Pernyataan pejabat membayar gaji di atas materai
-                                </td>
-                                <td id="skb_tanggunganhutang"></td>
-                                <td>
-                                    <input type="file" name="skb_tanggunganhutang" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="skb_tanggunganhutang" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('skb_tanggunganhutang')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Fotocopy legalisir DP3 / SKP 2 tahun terakhir</td>
-                                <td id="fcl_dp3_skp"></td>
-                                <td>
-                                    <input type="file" name="fcl_dp3_skp" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_dp3_skp" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_dp3_skp')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>Fotocopy legalisir Ijazah dan Transkrip Nilai</td>
-                                <td id="fcl_ijazah_transkripnilai"></td>
-                                <td>
-                                    <input type="file" name="fcl_ijazah_transkripnilai" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_ijazah_transkripnilai" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_ijazah_transkripnilai')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>Daftar riwayat hidup (disertai hobi, format sesuai MENPAN)</td>
-                                <td id="daftar_riwayathidup"></td>
-                                <td>
-                                    <input type="file" name="daftar_riwayathidup" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="daftar_riwayathidup" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('daftar_riwayathidup')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>Fotocopy legalisir KTP</td>
-                                <td id="fcl_ktp"></td>
-                                <td>
-                                    <input type="file" name="fcl_ktp" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_ktp" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_ktp')" class="btn btn-primary" type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>Fotocopy legalisir Kartu Pegawai</td>
-                                <td id="fcl_kartupegawai"></td>
-                                <td>
-                                    <input type="file" name="fcl_kartupegawai" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_kartupegawai" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_kartupegawai')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>Fotocopy legalisir Surat Nikah</td>
-                                <td id="fcl_suratnikah"></td>
-                                <td>
-                                    <input type="file" name="fcl_suratnikah" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="fcl_suratnikah" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('fcl_suratnikah')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td>Surat pernyataan satu istri / istri pertama (untuk PNS Wanita)</td>
-                                <td id="sp_satuistri_istripertama"></td>
-                                <td>
-                                    <input type="file" name="sp_satuistri_istripertama" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="sp_satuistri_istripertama" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('sp_satuistri_istripertama')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>17</td>
-                                <td>Surat pernyataan bersedia ditempatkan di seluruh wilayah</td>
-                                <td id="sp_bersediaditempatkan"></td>
-                                <td>
-                                    <input type="file" name="sp_bersediaditempatkan" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="sp_bersediaditempatkan" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('sp_bersediaditempatkan')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>18</td>
-                                <td>Surat keterangan sehat jasmani dari RSUD Pemerintah</td>
-                                <td id="sk_sehatjasmani"></td>
-                                <td>
-                                    <input type="file" name="sk_sehatjasmani" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="sk_sehatjasmani" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('sk_sehatjasmani')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>19</td>
-                                <td>Uraian tugas / TUPOKSI (TTD yang bersangkutan dan atasan langsung)</td>
-                                <td id="tupoksi"></td>
-                                <td>
-                                    <input type="file" name="tupoksi" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="tupoksi" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('tupoksi')" class="btn btn-primary" type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>20</td>
-                                <td>Sertifikat keahlian untuk tenaga kesehatan teknis</td>
-                                <td id="sertifikat_keahlian"></td>
-                                <td>
-                                    <input type="file" name="sertifikat_keahlian" style="display: none;">
-                                    <div class="input-group">
-                                        <input type="text" data-id="sertifikat_keahlian" class="form-control"
-                                               placeholder="Unggah berkas disini..." readonly style="cursor: pointer"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Ukuran file max. 2 MB">
-                                        <span class="input-group-btn">
-                                        <button onclick="btnUnggah('sertifikat_keahlian')" class="btn btn-primary"
-                                                type="button">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 @push('script')
     <script>
@@ -992,18 +551,6 @@
             $("#riwayatMutasiModal").modal('show');
         }
 
-        function btnUnggah(berkas) {
-            var input = $("input[name=" + berkas + "]");
-            input.trigger('click');
-            input.on('change', function () {
-                var files = $(this).prop("files"), names = $.map(files, function (val) {
-                    return val.name;
-                }), txt = $("input[data-id=" + berkas + "]");
-                txt.val(names);
-                $("input[data-id=" + berkas + "][data-toggle=tooltip]").attr('data-original-title', names);
-            });
-        }
-
         @else
         function verifyMutasi(id, nip, status) {
             var color = status == 'DISETUJUI' ? '#26B99A' : '#fa5555',
@@ -1028,16 +575,12 @@
                 allowOutsideClick: false
             });
         }
-
         @endif
 
-        function berkasMutasi(id, nip, status, check) {
+        function berkasMutasi(id, nip, status, check, url) {
             @if($level == 7)
             if (status == "DISETUJUI") {
-                $("#berkasMutasiModal .modal-title strong").text(nip);
-                $("#form-berkas-mutasi input[name=riwayatmutasi_id]").val(id);
-                $("#berkasMutasiModal").modal('show');
-
+                window.location.href = url;
             } else if (status == "DITOLAK") {
                 swal('PERHATIAN!', 'Tidak dapat mengunggah berkas mutasi karena status usulan mutasi Anda DITOLAK.', 'warning');
             } else {
@@ -1047,10 +590,7 @@
             @else
             if (status == "DISETUJUI") {
                 if (check == 1) {
-                    $("#berkasMutasiModal .modal-title strong").text(nip);
-                    $("#form-berkas-mutasi input[name=riwayatmutasi_id]").val(id);
-                    $("#berkasMutasiModal").modal('show');
-
+                    window.location.href = url;
                 } else {
                     swal('PERHATIAN!', 'User [' + nip + '] belum mengunggah berkas mutasi.', 'warning');
                 }
