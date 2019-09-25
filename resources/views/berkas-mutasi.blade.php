@@ -20,7 +20,7 @@
                             route('verify.berkas-mutasi')}}" method="post" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <input type="hidden" name="riwayatmutasi_id" value="{{$data->id}}">
-                                <input type="hidden" name="_method" value="{{$level == 7 ? '' : 'PUT'}}">
+                                <input type="hidden" name="_method" value="{{$level == 7 ? 'POST' : 'PUT'}}">
                                 <table style="border-bottom: 1px solid #ddd"
                                        class="table table-striped table-bordered table-hover">
                                     <thead>

@@ -506,7 +506,8 @@
 
             $("#nip").val('{{Auth::user()->username}}');
             $("#nama").val('{{$bio != "" ? $bio->nama : ''}}');
-            $("#id, #method, #jeniskenaikan, #alasanmutasi, #pertimbangan, #nipatasan, #minit, #tglditetapkan, #nosk, #tglsk, #nobkn, #tglbkn, #jabatanlama, #jabatanbaru, #tmtlama, #tmtbaru, #gajilama, #gajibaru, #masakerjatahunlama, #masakerjabulanlama, #masakerjatahunbaru, #masakerjabulanbaru").val('');
+            $("#method").val('POST');
+            $("#id, #jeniskenaikan, #alasanmutasi, #pertimbangan, #nipatasan, #minit, #tglditetapkan, #nosk, #tglsk, #nobkn, #tglbkn, #jabatanlama, #jabatanbaru, #tmtlama, #tmtbaru, #gajilama, #gajibaru, #masakerjatahunlama, #masakerjabulanlama, #masakerjatahunbaru, #masakerjabulanbaru").val('');
             $("#pangkatgolonganlama, #pangkatgolonganbaru, #eselonlama, #eselonbaru, #unitkerjalama, #unitkerjabaru").val('').selectpicker('refresh');
 
             $("#riwayatMutasiModal").modal('show');

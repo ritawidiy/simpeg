@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\BerkasMutasi;
 use App\Model\Biodata;
+use App\Model\Masteruser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -27,7 +28,9 @@ class RiwayatMutasi extends Controller
 
     public function createRiwayatMutasi(Request $request)
     {
+        $last_id = \App\Model\Riwayatmutasi::max('id');
         \App\Model\Riwayatmutasi::create([
+            'id' => $last_id + 1,
             'nip' => $request->nip,
             'nama' => $request->nama,
             'jeniskenaikan' => $request->jeniskenaikan,
@@ -131,9 +134,10 @@ class RiwayatMutasi extends Controller
     {
         $data = \App\Model\Riwayatmutasi::find($request->riwayatmutasi_id);
         $check = $data->getBerkasMutasi;
-
         if (!$check) {
+            $last_id = BerkasMutasi::max('id');
             BerkasMutasi::create([
+                'id' => $last_id + 1,
                 'riwayatmutasi_id' => $data->id,
                 'foto_berwarna' => $request->foto_berwarna != "" ? $request->foto_berwarna->getClientOriginalName() : null,
                 'status_foto_berwarna' => $request->foto_berwarna != "" ? 1 : 0,
