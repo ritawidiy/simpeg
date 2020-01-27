@@ -1,4 +1,4 @@
-@extends('layouts.master_user')
+@extends($level == 45 ? 'layouts.master_admin' : 'layouts.master_user')
 @section('tittle', $level == 45 ? 'Usulan Mutasi | SIMPEG (Sistem Informasi Kepegawaian)' :
 'Riwayat Mutasi | SIMPEG (Sistem Informasi Kepegawaian)')
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layouts.master_user')
+@extends($level == 45 ? 'layouts.master_admin' : 'layouts.master_user')
 @section('tittle', 'Berkas Mutasi: '.$data->nip.' | SIMPEG (Sistem Informasi Kepegawaian)')
 @section('content')
     <div class="right_col" role="main">

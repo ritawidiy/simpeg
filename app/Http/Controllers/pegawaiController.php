@@ -28,7 +28,7 @@ class pegawaiController extends Controller
     //admin//
     public function tampildatapegawai()
     {
-        $data = Biodata::where('tk2d', false)->take(5)->get();
+        $data = Biodata::where('tk2d', false)->take(10)->get();
         return view('admin.biodata_pegawai', compact('data'));
     }
 
@@ -603,13 +603,4 @@ class pegawaiController extends Controller
             $query->whereRaw(('("nama" LIKE \'%' . $request->nama . '%\')'));
         });
     }
-
-
-    //user//
-    public function indexuser()
-    {
-        $bio = Biodata::where('tk2d', false)->get();
-        return view('user/bio_Pegawai', array('bio' => $bio));
-    }
-
 }

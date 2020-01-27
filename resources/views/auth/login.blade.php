@@ -37,7 +37,7 @@
               {{ csrf_field() }}
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="NIP / NRTK2D" required="" name="username"/>
+                  <input type="text" class="form-control" placeholder="NIP" required="" name="username"/>
               </div>
               <div>
                 <input type="password" class="form-control" placeholder="Kata Sandi" required="" name="password"/>

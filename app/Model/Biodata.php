@@ -239,5 +239,8 @@ class Biodata extends Model
         return $this->hasMany(Mastergolonganpangkat::class, 'nip');
     }
 
-
+    public function getBerkasPegawai()
+    {
+        return $this->hasOne(BerkasPegawai::class, 'nip');
+    }
 }

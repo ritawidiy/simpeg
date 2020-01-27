@@ -24,6 +24,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
     Route::get('admin_page', 'adminController@adminn')->name('admin_page');
     //Route::get('/', 'simpegController@index')->name('dashboard');    
     Route::get('admin/biodata_pegawai', 'pegawaiController@tampildatapegawai')->name('data.pegawai');
+
     Route::get('admin/tambahdata', 'pegawaiController@create')->name('tambah.pegawai');
     Route::post('admin/tambahdata/store', 'pegawaiController@storepegawai')->name('save.biodata_pegawai'); //tampil form tambah pegawai
     Route::get('admin/editpegawai/{id}', 'pegawaiController@edit')->name('editpegawai'); //tampil form edit
@@ -449,8 +450,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
 
 
     //ROUTE USER//
-    Route::get('user_page', 'userController@userr')->name('user_page');
-    Route::get('user/bio_Pegawai', 'pegawaiController@indexuser')->name('data.pegawaiUser');
+    Route::get('user/bio_Pegawai', 'userController@index')->name('data.pegawaiUser');
     Route::get('user/reg_Naikpngkt', 'penjagaanController@reg_naikpngkt')->name('reg.naikpangkat.User');
     Route::get('user/pil_Naikpngkt', 'penjagaanController@pil_naikpangkat')->name('pil.naikpangkat.User');
     Route::get('user/naik_Gaji_Berkala', 'penjagaanController@reg_naikpngkt')->name('naik_Gajikala.User');
@@ -471,9 +471,33 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
     Route::get('biodata_naikgajiberkala', 'penjagaanController@naikgajiberkala');
     Route::get('biodata_usiapensiun', 'penjagaanController@usiapensiun');
     Route::get('biodata_naiktk2d', 'penjagaanController@naiktk2d');
+    Route::post('tambah/pegawai', 'tampildataController@savepegawai')->name('save.pegawai');
 
+    Route::group(['prefix' => 'berkas-pegawai'], function () {
 
-    Route::post('tambah/pegawai', 'tampildataController@savepegwai')->name('save.pegawai');
+        Route::get('{nip}', [
+            'uses' => 'BerkasPegawaiController@showBerkasPegawai',
+            'as' => 'show.berkas-pegawai'
+        ]);
+
+        Route::get('{nip}/{berkas}/unduh', [
+            'uses' => 'BerkasPegawaiController@unduhBerkasPegawai',
+            'as' => 'unduh.berkas-pegawai'
+        ]);
+
+        Route::post('unggah', [
+            'uses' => 'BerkasPegawaiController@unggahBerkasPegawai',
+            'as' => 'unggah.berkas-pegawai',
+            'middleware' => 'user'
+        ]);
+
+        Route::put('verify', [
+            'uses' => 'BerkasPegawaiController@verifyBerkasPegawai',
+            'as' => 'verify.berkas-pegawai',
+            'middleware' => 'admin'
+        ]);
+
+    });
 
     Route::group(['prefix' => 'riwayat-mutasi'], function () {
 

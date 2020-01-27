@@ -74,15 +74,18 @@
                                         <td style="vertical-align: middle"> {{ $value->tempat_tugas }} </td>
                                         <td style="vertical-align: middle">
                                             <div class="btn-group">
-                                                <a href="{{ route('showpegawai',$id=$value->nip) }}"
-                                                   class="btn btn-info btn-sm"
-                                                   data-toggle="tooltip" title="View"><i class="fa fa-eye"></i></a>
-                                                <a type="submit" href="{{ route('editpegawai',$id=$value->id) }}"
-                                                   class="btn btn-warning btn-sm"
-                                                   data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('printpegawai',$id=$value->nip) }}"
                                                    class="btn btn-success btn-sm" target="_blank"
                                                    data-toggle="tooltip" title="Print"><i class="fa fa-print"></i></a>
+                                                <a href="{{ route('showpegawai',$id=$value->nip) }}"
+                                                   class="btn btn-info btn-sm" data-toggle="tooltip" title="View">
+                                                    <i class="fa fa-eye"></i></a>
+                                                <a type="submit" href="{{ route('editpegawai',$id=$value->id) }}"
+                                                   class="btn btn-warning btn-sm" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('show.berkas-pegawai',$nip=$value->nip) }}"
+                                                   class="btn btn-danger btn-sm" data-toggle="tooltip" title="Berkas">
+                                                    <i class="fa fa-archive"></i></a>
                                             </div>
                                             <hr style="margin: .5em 0">
                                             <div class="btn-group">
@@ -146,7 +149,8 @@
                             <div class="row form-group">
                                 <div class="col-sm-4" id="action-btn">
                                     <div class="btn-group" style="float: right">
-                                        <a href="{{route('tambah.pegawai')}}" class="btn btn-primary btn-sm" style="font-weight: 600">
+                                        <a href="{{route('tambah.pegawai')}}" class="btn btn-primary btn-sm"
+                                           style="font-weight: 600">
                                             <i class="fa fa-plus"></i>&ensp;TAMBAH
                                         </a>
                                         <button id="btn_pdf" type="button" class="btn btn-info btn-sm"
@@ -1246,7 +1250,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="tglsurat" class="control-label">Tanggal Surat</label>
-                                <input type="date" class="form-control"  name="tglsurat" placeholder="yyyy-mm-dd"
+                                <input type="date" class="form-control" name="tglsurat" placeholder="yyyy-mm-dd"
                                        required>
                             </div>
                         </div>
@@ -2054,8 +2058,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Bahasa') {
+            } else if (check == 'Bahasa') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Bahasa Daerah</th>' +
@@ -2086,8 +2089,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Cuti') {
+            } else if (check == 'Cuti') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2128,8 +2130,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Diklat') {
+            } else if (check == 'Diklat') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2172,8 +2173,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Gaji') {
+            } else if (check == 'Gaji') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Waktu</th>' +
@@ -2209,8 +2209,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Hukuman') {
+            } else if (check == 'Hukuman') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2246,8 +2245,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Jabatan') {
+            } else if (check == 'Jabatan') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2278,8 +2276,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Kursus') {
+            } else if (check == 'Kursus') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2323,8 +2320,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Organisasi') {
+            } else if (check == 'Organisasi') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Organisasi</th>' +
@@ -2356,8 +2352,7 @@
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
 
-            }
-            else if (check == 'Pangkat') {
+            } else if (check == 'Pangkat') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2386,17 +2381,17 @@
                             '<button type="button" class="btn btn-info btn-sm dropdown-toggle" ' +
                             'data-toggle="dropdown"><span class="caret"></span></button>' +
                             '<ul class="dropdown-menu" role="menu">' +
-                            '<li><a href="{{route('petikan.fungsional', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.fungsional', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">Fungsional</a></li>' +
-                            '<li><a href="{{route('petikan.fungsional-struktural', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.fungsional-struktural', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">Fungsional Struktural</a></li>' +
-                            '<li><a href="{{route('petikan.perorangan', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.perorangan', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">Perorangan</a></li>' +
-                            '<li><a href="{{route('petikan.struktural', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.struktural', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">Struktural</a></li>' +
-                            '<li><a href="{{route('petikan.struktural-perorangan', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.struktural-perorangan', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">Struktural Perorangan</a></li>' +
-                            '<li><a href="{{route('petikan.sk-perorangan', ['nip' => ''])}}/'+nip+'" ' +
+                            '<li><a href="{{route('petikan.sk-perorangan', ['nip' => ''])}}/' + nip + '" ' +
                             'target="_blank">SK Perorangan</a></li>' +
                             '</ul></div></td></tr>';
                     });
@@ -2404,8 +2399,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Penataran') {
+            } else if (check == 'Penataran') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2448,8 +2442,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Pendidikan') {
+            } else if (check == 'Pendidikan') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Pendidikan</th>' +
@@ -2481,8 +2474,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Penghargaan') {
+            } else if (check == 'Penghargaan') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2515,8 +2507,7 @@
                 } else {
                     tbody.html('<tr><td colspan="4"><em>Data ' + check + ' tidak ditemukan&hellip;</em></td></tr>');
                 }
-            }
-            else if (check == 'Penugasan') {
+            } else if (check == 'Penugasan') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -2526,8 +2517,7 @@
                     '<th><button type="button" class="btn btn-primary btn-sm" onclick="tambahPenugasan(\'' + nip + '\')"><i class="fa fa-plus"></i>&ensp;Tambah Data</button></th></tr>'
                 );
 
-            }
-            else if (check == 'Seminar') {
+            } else if (check == 'Seminar') {
                 thead.html(
                     '<tr><th>#</th>' +
                     '<th>Kegiatan</th>' +
@@ -3020,8 +3010,7 @@
         }
 
         //data pendidikan
-        function tambahPendidikan(nip)
-        {
+        function tambahPendidikan(nip) {
             $("#pendidikanModal .modal-title").html('Tambah Data Pendidikan: <strong>' + nip + '</strong>');
             $("#form-pendidikan").attr('action', '{{ route('create.data-pendidikan') }}');
             $("#form-pendidikan button[type=submit]").text('Submit');
@@ -3032,8 +3021,8 @@
 
             $("#pendidikanModal").modal('show');
         }
-        function editPendidikan(id)
-        {
+
+        function editPendidikan(id) {
             $("#form-pendidikan").attr('action', '{{ route('update.data-pendidikan',['id' => '']) }}/' + id);
             $("#form-pendidikan button[type=submit]").text('Save Changes');
 
@@ -3058,8 +3047,7 @@
         }
 
         //data Penghargaan
-        function tambahPenghargaan(nip)
-        {
+        function tambahPenghargaan(nip) {
             $("#penghargaanModal .modal-title").html('Tambah Data Penghargaan: <strong>' + nip + '</strong>');
             $("#form-penghargaan").attr('action', '{{ route('create.data-penghargaan') }}');
             $("#form-penghargaan button[type=submit]").text('Submit');
@@ -3070,8 +3058,8 @@
 
             $("#penghargaanModal").modal('show');
         }
-        function editPenghargaan(id)
-        {
+
+        function editPenghargaan(id) {
             $("#form-penghargaan").attr('action', '{{ route('update.data-penghargaan',['id' => '']) }}/' + id);
             $("#form-penghargaan button[type=submit]").text('Save Changes');
 
@@ -3095,8 +3083,7 @@
         }
 
         //data Penugasan
-        function tambahPenugasan(nip)
-        {
+        function tambahPenugasan(nip) {
             $("#penugasanModal .modal-title").html('Tambah Data Penugasan: <strong>' + nip + '</strong>');
             $("#form-penugasan").attr('action', '{{ route('create.data-penugasan') }}');
             $("#form-penugasan button[type=submit]").text('Submit');
@@ -3108,8 +3095,8 @@
 
             $("#penugasanModal").modal('show');
         }
-        function editPenugasan(id)
-        {
+
+        function editPenugasan(id) {
             $("#form-penugasan").attr('action', '{{ route('update.data-penugasan',['id' => '']) }}/' + id);
             $("#form-penugasan button[type=submit]").text('Save Changes');
 
@@ -3136,8 +3123,7 @@
         }
 
         //data seminar
-        function tambahSeminar(nip)
-        {
+        function tambahSeminar(nip) {
             $("#seminarModal .modal-title").html('Tambah Data Seminar: <strong>' + nip + '</strong>');
             $("#form-seminar").attr('action', '{{ route('create.data-seminar') }}');
             $("#form-seminar button[type=submit]").text('Submit');
@@ -3149,8 +3135,8 @@
 
             $("#seminarModal").modal('show');
         }
-        function editSeminar(id)
-        {
+
+        function editSeminar(id) {
             $("#form-seminar").attr('action', '{{ route('update.data-seminar',['id' => '']) }}/' + id);
             $("#form-seminar button[type=submit]").text('Save Changes');
 
@@ -3175,11 +3161,6 @@
 
             $("#seminarModal").modal('show');
         }
-
-
-
-
-
 
 
         function hapusData(id, check) {

@@ -78,11 +78,7 @@
                     <div class="menu_section">
                         <h3>List Menu</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-user"></i> Pegawai <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="{{ route('data.pegawai')}}">Biodata Pegawai</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{{route('data.pegawai')}}"><i class="fa fa-user"></i> Pegawai</a></li>
                             <li><a><i class="fa fa-desktop"></i> Penjagaan <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route ('naikpangkatreg') }}">Kenaikan Pangkat Reguler</a></li>
