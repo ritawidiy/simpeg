@@ -153,7 +153,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         /*
          * Application Service Providers...
